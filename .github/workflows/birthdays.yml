@@ -1,0 +1,28 @@
+name: Birthday wa.me links
+
+
+on:
+schedule:
+# 06:05 UTC → 08:05 NL zomertijd; in winter aanpassen als je exact 08:05 wilt
+- cron: "5 6 * * *"
+workflow_dispatch:
+
+
+jobs:
+run:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- uses: actions/setup-node@v4
+with:
+node-version: 20
+- run: npm ci || npm i
+- name: Run script
+env:
+TZ_OVERRIDE: Europe/Amsterdam
+GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }} # optioneel
+TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }} # optioneel
+run: npm start
