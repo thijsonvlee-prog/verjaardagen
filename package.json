@@ -1,0 +1,13 @@
+{
+"name": "birthday-wa-notifier",
+"version": "1.0.0",
+"type": "module",
+"private": true,
+"scripts": {
+"start": "node src/birthdays.js"
+},
+"dependencies": {
+"googleapis": "^133.0.0",
+"node-fetch": "^3.3.2"
+}
+}
